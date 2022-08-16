@@ -1,5 +1,10 @@
 message("\nBuilding VkShared")
 
+cmake_minimum_required(VERSION 3.9.0)
+set(CMAKE_CXX_STANDARD 23)
+include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
+conan_basic_setup()  
+
 set(TargetName "VkShared")
 
 file(GLOB_RECURSE SourceFiles CONFIGURE_DEPENDS "*.cpp")
