@@ -7,11 +7,8 @@ set(CMAKE_CXX_STANDARD 23)
 
 find_package(Vulkan REQUIRED)
 
-file(GLOB_RECURSE SourceFiles CONFIGURE_DEPENDS "*.cpp")
-list(FILTER SourceFiles EXCLUDE REGEX "build/.*" )
-
-file(GLOB_RECURSE HeaderFiles CONFIGURE_DEPENDS "*.h")
-list(FILTER HeaderFiles EXCLUDE REGEX "build/.*" )
+file(GLOB_RECURSE SourceFiles CONFIGURE_DEPENDS "${TargetName}/*.cpp")
+file(GLOB_RECURSE HeaderFiles CONFIGURE_DEPENDS "${TargetName}/*.h")
 
 add_library(${TargetName} STATIC ${SourceFiles} ${HeaderFiles})
 set_target_properties(${TargetName} PROPERTIES DEBUG_POSTFIX d)
