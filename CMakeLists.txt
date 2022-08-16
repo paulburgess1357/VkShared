@@ -2,7 +2,7 @@ set(TargetName "VkShared")
 message("\nBuilding " TargetName)
 
 cmake_minimum_required(VERSION 3.9.0)
-project(TargetName)
+project(VkShared)
 set(CMAKE_CXX_STANDARD 23)
 
 file(GLOB_RECURSE SourceFiles CONFIGURE_DEPENDS "*.cpp")
