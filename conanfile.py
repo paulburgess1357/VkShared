@@ -16,7 +16,7 @@ class HelloConan(ConanFile):
     default_options = {"shared": False, "fPIC": True}
     generators = "cmake"
     exports_sources = "CMakeLists.txt", "VkShared/*"
-    requires = "vulkan-loader/1.3.216.0"
+    requires = ["vulkan-loader/1.3.216.0"]
 
     def config_options(self):
         if self.settings.os == "Windows":
@@ -28,7 +28,7 @@ class HelloConan(ConanFile):
         cmake.build()
 
     def package(self):
-        self.copy("*.h", dst="include", src="src")
+        self.copy("*.h", dst="include", src="VkShared")
         self.copy("*.lib", dst="lib", keep_path=False)
         self.copy("*.dll", dst="bin", keep_path=False)
         self.copy("*.dylib*", dst="lib", keep_path=False)

@@ -14,7 +14,10 @@ file(GLOB_RECURSE HeaderFiles CONFIGURE_DEPENDS "${TargetName}/*.h")
 add_library(${TargetName} STATIC ${SourceFiles} ${HeaderFiles})
 set_target_properties(${TargetName} PROPERTIES DEBUG_POSTFIX d)
 
-target_include_directories(${TargetName} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
+target_include_directories(${TargetName} PRIVATE 
+	${CMAKE_CURRENT_SOURCE_DIR}/${TargetName}
+	${CONAN_INCLUDE_DIRS}
+)
 
 source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${HeaderFiles})
 source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${SourceFiles})
