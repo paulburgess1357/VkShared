@@ -11,33 +11,32 @@ file(GLOB_RECURSE HeaderFiles CONFIGURE_DEPENDS "${TargetName}/*.h")
 add_library(${TargetName} STATIC ${SourceFiles} ${HeaderFiles})
 set_target_properties(${TargetName} PROPERTIES DEBUG_POSTFIX d)
 
-set(USE_CONAN FALSE)
+
+set(IncludeDirectories ${CMAKE_CURRENT_SOURCE_DIR}/${TargetName})
+set(LinkDirectories)
+
+set(ConanSetupHasRun False)
 if(EXISTS ${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
-    message("Using Conan for dependencies")
-	set(USE_CONAN TRUE)
-endif()
-	
-if(USE_CONAN)
+	message("Using Conan for dependency management")
+	message("Loading Conan macros")
 	include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
-	conan_basic_setup(TARGETS)
-	target_include_directories(${TargetName} PRIVATE 
-		${CMAKE_CURRENT_SOURCE_DIR}/${TargetName}
-		${CONAN_INCLUDE_DIRS}
-	)
-	target_link_libraries(${TargetName} 
-		CONAN_PKG::vulkan-loader
-	)
+	conan_basic_setup(TARGETS NO_OUTPUT_DIRS)
+	set(ConanSetupHasRun True)
+
+	list(APPEND IncludeDirectories ${CONAN_INCLUDE_DIRS})
+	list(APPEND LinkDirectories CONAN_PKG::vulkan-loader)
 else()
 	find_package(Vulkan REQUIRED)
-	
-	target_include_directories(${TargetName} PRIVATE 
-	    ${CMAKE_CURRENT_SOURCE_DIR}/${TargetName}
-		${Vulkan_INCLUDE_DIR}
-	)
-	target_link_libraries(${TargetName} 
-		${Vulkan_LIBRARIES}
-	)
+	list(APPEND IncludeDirectories ${Vulkan_INCLUDE_DIR})
+	list(APPEND LinkDirectories ${Vulkan_LIBRARIES})
 endif()
+
+target_include_directories(${TargetName} PRIVATE 
+	${IncludeDirectories}
+)
+target_link_libraries(${TargetName} 
+	${LinkDirectories}
+)
 
 source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${HeaderFiles})
 source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${SourceFiles})
