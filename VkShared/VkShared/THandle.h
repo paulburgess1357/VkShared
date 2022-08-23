@@ -8,7 +8,7 @@ namespace VulkanUtilities::VkShared {
 namespace Exceptions {
 class VkHandleException final : public std::exception {
  public:
-  [[nodiscard]] char const* what() const override {
+  [[nodiscard]] char const* what() const noexcept override {
     return "VkHandle Creation failed";
   }
 };
