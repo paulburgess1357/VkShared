@@ -64,7 +64,7 @@ class THandle {
     m_destroyed = true;
   }
 
-  T m_wrapped_handle{VK_NULL_HANDLE};
+  T m_wrapped_handle{};
   bool m_destroyed{false};
   bool m_reset{false};
 };
