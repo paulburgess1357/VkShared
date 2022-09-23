@@ -3,7 +3,7 @@
 #include <utility>
 #include <vulkan/vulkan_core.h>
 
-namespace VulkanUtilities::VkShared {
+namespace VkShared {
 
 namespace Exceptions {
 class VkHandleException final : public std::exception {
@@ -69,4 +69,4 @@ class THandle {
   bool m_reset{false};
 };
 
-}  // namespace VulkanUtilities::VkShared
+}  // namespace VkShared

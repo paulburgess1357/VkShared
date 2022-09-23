@@ -1,10 +1,12 @@
 #pragma once
 
-namespace VulkanUtilities::VkShared::Enums {
+namespace VkShared::Enums {
+
 enum class QueueFamily {
   Graphics,
   Transfer,
   Presentation,
   Compute
 };
-}  // namespace VulkanUtilities::VkShared::Enums
+
+}  // namespace VkShared::Enums
