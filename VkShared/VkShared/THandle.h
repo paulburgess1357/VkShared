@@ -20,13 +20,17 @@ class THandle {
   template <typename... Args>
   explicit THandle(Args&&... args) {
     m_wrapped_handle.create(std::forward<Args>(args)...);
-    if (!handle()) {
+    if (!m_wrapped_handle.handle) {
       VkError("Failed to create Vulkan handle");
 #ifndef NDEBUG
       throw Exceptions::VkHandleException();
 #endif
     }
   }
+  explicit THandle(){
+    m_wrapped_handle.create();
+  }
+
   ~THandle() {
     if (!m_destroyed) {
       destroy();
@@ -48,7 +52,7 @@ class THandle {
   THandle(const THandle& source) = delete;
   THandle& operator=(const THandle& rhs) = delete;
 
-  [[nodiscard]] auto& handle() const {
+  [[nodiscard]] auto& operator()() const {
     return m_wrapped_handle.handle;
   }
 
