@@ -47,7 +47,6 @@ class THandle {
   }
 
   THandle(THandle&& source) noexcept : m_wrapped_handle{source.m_wrapped_handle} {
-    this->destroy();
     source.reset();
   }
 
