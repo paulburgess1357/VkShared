@@ -41,12 +41,15 @@ class THandle {
     if (this != &rhs) {
       this->destroy();
       this->m_wrapped_handle = rhs.m_wrapped_handle;
+      this->m_destroyed = rhs.m_destroyed;
+      this->m_reset = rhs.m_reset;
       rhs.reset();
     }
     return *this;
   }
 
-  THandle(THandle&& source) noexcept : m_wrapped_handle{source.m_wrapped_handle} {
+  THandle(THandle&& source) noexcept
+      : m_wrapped_handle{source.m_wrapped_handle}, m_destroyed{source.m_destroyed}, m_reset{source.m_reset} {
     source.reset();
   }
 
