@@ -9,4 +9,8 @@ enum class QueueFamily {
   Compute
 };
 
+enum class PipelineType {
+  Standard
+};
+
 }  // namespace VkShared::Enums
