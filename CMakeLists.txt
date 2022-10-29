@@ -14,7 +14,7 @@ set_target_properties(${TargetName} PROPERTIES DEBUG_POSTFIX d)
 # All warnings
 target_compile_options(${TargetName} PRIVATE
   $<$<CXX_COMPILER_ID:MSVC>:/W4 /WX>
-  $<$<NOT:$<CXX_COMPILER_ID:MSVC>>:-Wall -Wno-unknown-pragmas -Wextra -Wpedantic>
+  $<$<NOT:$<CXX_COMPILER_ID:MSVC>>:-Wall -Wno-unknown-pragmas -Wextra -Wpedantic -Werror>
 )
 
 # Create include and link directory variables
