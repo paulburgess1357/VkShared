@@ -26,5 +26,5 @@
 #define VkError(...)
 #define VkWarning(...)
 #define VkAssert(...)
-#define VkCheck(...)
+#define VkCheck(value, exception) if((value) != VK_SUCCESS){throw (exception);} static_assert(true, "")
 #endif
