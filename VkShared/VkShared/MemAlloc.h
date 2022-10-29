@@ -1,6 +1,9 @@
 #pragma once
 #define VMA_VULKAN_VERSION 1002000
+
+#pragma warning(push, 0)
 #pragma GCC diagnostic push
+
 #pragma GCC diagnostic ignored "-Wall"
 #pragma GCC diagnostic ignored "-Wunknown-pragmas"
 #pragma GCC diagnostic ignored "-Wextra"
@@ -11,12 +14,11 @@
 #pragma GCC diagnostic ignored "-Wmissing-field-initializers"
 #pragma GCC diagnostic ignored "-Wparentheses"
 
-#pragma warning(push, 0)
 #include <vk_mem_alloc.h>
-#pragma warning(pop)
 
 #pragma GCC diagnostic pop
+#pragma warning(pop)
 
 namespace VkShared::VMA_TEST {
-	[[nodiscard]] VmaAllocation test();
-} // namespace VkShared::VMA_TEST
+[[nodiscard]] VmaAllocation test();
+}  // namespace VkShared::VMA_TEST
