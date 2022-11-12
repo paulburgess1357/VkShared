@@ -13,4 +13,12 @@ enum class PipelineType {
   Standard
 };
 
+enum class PipelineLayoutType {
+  Standard
+};
+
+enum class MaterialType {
+  Standard
+};
+
 }  // namespace VkShared::Enums
